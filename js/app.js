@@ -6,7 +6,7 @@ const Enemy = function(y) {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.x = 100;
+    this.x = -100;
     this.y = 0;
 };
 
@@ -16,7 +16,10 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x = this.x * dt;
+    this.x = this.x + 2;
+    if (this.x === 510) {
+      this.x = -100;
+    };
 };
 
 // Draw the enemy on the screen, required method for game
@@ -61,10 +64,6 @@ inky.y = 65;
 blinky.y = 145;
 pinky.y = 65;
 clyde.y = 225;
-
-//Enemy Movement
-inky.update(20);
-blinky.update(12);
 
 
 
