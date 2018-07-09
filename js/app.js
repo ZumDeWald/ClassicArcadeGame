@@ -44,20 +44,31 @@ Player.prototype.render = function() {
 };
 
 Player.prototype.handleInput = function(e) {
+  if ((e === 'left') && (this.x <= 0)) {
+    return;
+  } else if ((e === 'up') && (this.y <= 100)) {
+    this.y = 400;
+    return;
+  } else if ((e === 'right') && (this.x >= 400)) {
+    return;
+  } else if ((e === 'down') && (this.y >= 400)) {
+    return;
+  } else {
+
   switch (e){
     case 'left': this.x = this.x - 100;
     break;
 
-    case 'up': this.y = this.y - 100;
+    case 'up': this.y = this.y - 83;
     break;
 
     case 'right': this.x = this.x + 100;
     break;
 
-    case 'down': this.y = this.y + 100;
+    case 'down': this.y = this.y + 83;
     break;
   }
-
+}
 
 
 };
