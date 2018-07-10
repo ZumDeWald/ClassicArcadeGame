@@ -20,6 +20,21 @@ Enemy.prototype.update = function() {
     if (this.x >= 510) {
       this.x = -100;
     };
+
+    //CheckCollisions
+
+    //Spacial Padding
+    const tolerance = 20;
+
+    if (
+      (this.x >= this.x + )
+    )
+
+    if ((this.x === player.x) &&
+        (this.y === player.y)) {
+          player.x = 202;
+          player.y = 404;
+        }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -32,22 +47,25 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 const Player = function() {
   this.sprite = 'images/char-cat-girl.png';
-  this.x = 200;
-  this.y = 400;
+  this.x = 202;
+  this.y = 404;
 };
 
-Player.prototype.update = function (dt) {
+Player.prototype.update = function () {
 };
 
 Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+
+//Player movement
 Player.prototype.handleInput = function(e) {
-  if ((e === 'left') && (this.x <= 0)) {
+  if ((e === 'left') && (this.x <= 10)) {
     return;
   } else if ((e === 'up') && (this.y <= 100)) {
-    this.y = 400;
+    this.x = 202;
+    this.y = 404;
     return;
   } else if ((e === 'right') && (this.x >= 400)) {
     return;
@@ -56,13 +74,13 @@ Player.prototype.handleInput = function(e) {
   } else {
 
   switch (e){
-    case 'left': this.x = this.x - 100;
+    case 'left': this.x = this.x - 101;
     break;
 
     case 'up': this.y = this.y - 83;
     break;
 
-    case 'right': this.x = this.x + 100;
+    case 'right': this.x = this.x + 101;
     break;
 
     case 'down': this.y = this.y + 83;
@@ -87,16 +105,16 @@ const clyde = new Enemy();
 let allEnemies = [inky, blinky, pinky, clyde];
 
 //Set Enemy to specific 'lane'
-inky.y = 65;
-blinky.y = 145;
-pinky.y = 65;
+inky.y = 60;
+blinky.y = 60;
+pinky.y = 145;
 clyde.y = 225;
 
 //Set Enemy Speeds
 inky.dt = 2;
 blinky.dt = 1;
-pinky.dt = 0.5;
-clyde.dt = 3;
+pinky.dt = 3;
+clyde.dt = 2;
 
 
 
