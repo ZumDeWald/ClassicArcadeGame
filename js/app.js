@@ -21,20 +21,7 @@ Enemy.prototype.update = function() {
       this.x = -100;
     };
 
-    //CheckCollisions
-
-    //Spacial Padding
-    const tolerance = 20;
-
-    if (
-      (this.x >= this.x + )
-    )
-
-    if ((this.x === player.x) &&
-        (this.y === player.y)) {
-          player.x = 202;
-          player.y = 404;
-        }
+    this.position = [this.x, this.y];
 };
 
 // Draw the enemy on the screen, required method for game
@@ -48,10 +35,11 @@ Enemy.prototype.render = function() {
 const Player = function() {
   this.sprite = 'images/char-cat-girl.png';
   this.x = 202;
-  this.y = 404;
+  this.y = 380;
 };
 
 Player.prototype.update = function () {
+  this.position = [this.x, this.y];
 };
 
 Player.prototype.render = function() {
@@ -65,7 +53,7 @@ Player.prototype.handleInput = function(e) {
     return;
   } else if ((e === 'up') && (this.y <= 100)) {
     this.x = 202;
-    this.y = 404;
+    this.y = 380;
     return;
   } else if ((e === 'right') && (this.x >= 400)) {
     return;
@@ -74,16 +62,16 @@ Player.prototype.handleInput = function(e) {
   } else {
 
   switch (e){
-    case 'left': this.x = this.x - 101;
+    case 'left': this.x = this.x - 100;
     break;
 
-    case 'up': this.y = this.y - 83;
+    case 'up': this.y = this.y - 80;
     break;
 
-    case 'right': this.x = this.x + 101;
+    case 'right': this.x = this.x + 100;
     break;
 
-    case 'down': this.y = this.y + 83;
+    case 'down': this.y = this.y + 80;
     break;
   }
 }
@@ -107,14 +95,14 @@ let allEnemies = [inky, blinky, pinky, clyde];
 //Set Enemy to specific 'lane'
 inky.y = 60;
 blinky.y = 60;
-pinky.y = 145;
-clyde.y = 225;
+pinky.y = 140;
+clyde.y = 220;
 
 //Set Enemy Speeds
-inky.dt = 2;
-blinky.dt = 1;
+inky.dt = 1;
+blinky.dt = 3;
 pinky.dt = 3;
-clyde.dt = 2;
+clyde.dt = 4;
 
 
 
@@ -134,3 +122,14 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+
+const checkCollisions = () => {
+  if (((player.position +- 5) === (inky.position +- 5)) ||
+      ((player.position +- 5) === (blinky.position +- 5)) ||
+      ((player.position +- 5) === (pinky.position +- 5)) ||
+      ((player.position +- 5) === (clyde.position +- 5))) {
+        player.x = 202;
+        player.y = 380;
+      };
+}
