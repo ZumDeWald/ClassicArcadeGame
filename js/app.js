@@ -21,7 +21,36 @@ Enemy.prototype.update = function() {
       this.x = -100;
     };
 
-    this.position = [this.x, this.y];
+    //Check for collisions
+    position = this.x;
+    for (i=0; i<=26; i++) {
+      if ((position === player.x) && (this.y === player.y))
+       {
+        player.x = 202;
+        player.y = 380;
+      };
+      position = (position + 1);
+    }
+
+/*  Replaced with loop above
+        if (((this.x === player.x) && (this.y === player.y)) ||
+        (((this.x + 1) === player.x) && (this.y === player.y)) ||
+        (((this.x + 2) === player.x) && (this.y === player.y)) ||
+        (((this.x + 3) === player.x) && (this.y === player.y)) ||
+        (((this.x + 4) === player.x) && (this.y === player.y)) ||
+        (((this.x + 5) === player.x) && (this.y === player.y)) ||
+        (((this.x + 6) === player.x) && (this.y === player.y)) ||
+        (((this.x + 7) === player.x) && (this.y === player.y)) ||
+        (((this.x + 8) === player.x) && (this.y === player.y)) ||
+        (((this.x + 9) === player.x) && (this.y === player.y)) ||
+        (((this.x + 10) === player.x) && (this.y === player.y)) ||
+        (((this.x + 11) === player.x) && (this.y === player.y)) ||
+        (((this.x + 12) === player.x) && (this.y === player.y)) ||
+        (((this.x + 13) === player.x) && (this.y === player.y)))
+         {
+          player.x = 202;
+          player.y = 380;
+        } */
 };
 
 // Draw the enemy on the screen, required method for game
@@ -39,7 +68,6 @@ const Player = function() {
 };
 
 Player.prototype.update = function () {
-  this.position = [this.x, this.y];
 };
 
 Player.prototype.render = function() {
@@ -57,7 +85,7 @@ Player.prototype.handleInput = function(e) {
     return;
   } else if ((e === 'right') && (this.x >= 400)) {
     return;
-  } else if ((e === 'down') && (this.y >= 400)) {
+  } else if ((e === 'down') && (this.y >= 380)) {
     return;
   } else {
 
@@ -124,11 +152,12 @@ document.addEventListener('keyup', function(e) {
 });
 
 
+//Check for Collisions
 const checkCollisions = () => {
-  if (((player.position +- 5) === (inky.position +- 5)) ||
-      ((player.position +- 5) === (blinky.position +- 5)) ||
-      ((player.position +- 5) === (pinky.position +- 5)) ||
-      ((player.position +- 5) === (clyde.position +- 5))) {
+  if ((player.position === inky.position) ||
+      (player.position === blinky.position) ||
+      (player.position === pinky.position) ||
+      (player.position === clyde.position)) {
         player.x = 202;
         player.y = 380;
       };
