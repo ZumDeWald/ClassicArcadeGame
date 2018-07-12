@@ -10,6 +10,8 @@ const Enemy = function(y) {
     this.y = 0;
 };
 
+
+
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function() {
@@ -53,14 +55,16 @@ Enemy.prototype.update = function() {
         } */
 };
 
+
+
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+
+
+//Player Object Constructor Function and Prototype Methods
 const Player = function() {
   this.sprite = 'images/char-cat-girl.png';
   this.x = 202;
@@ -74,19 +78,41 @@ Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+Player.prototype.blink = function() {
+  ctx.globalAlpha = 0.5;
+
+  setTimeout(() => {
+  ctx.globalAlpha = 1.0;}, 100);
+
+  setTimeout(() => {
+  ctx.globalAlpha = 0.5;}, 200);
+
+  setTimeout(() => {
+  ctx.globalAlpha = 1.0;}, 300);
+};
+
+
 
 //Player movement
 Player.prototype.handleInput = function(e) {
   if ((e === 'left') && (this.x <= 10)) {
     return;
+
   } else if ((e === 'up') && (this.y <= 100)) {
+
+    //Trigger Win State
+    player.blink();
+
     this.x = 202;
     this.y = 380;
     return;
+
   } else if ((e === 'right') && (this.x >= 400)) {
     return;
+
   } else if ((e === 'down') && (this.y >= 380)) {
     return;
+
   } else {
 
   switch (e){
@@ -120,11 +146,13 @@ const clyde = new Enemy();
 
 let allEnemies = [inky, blinky, pinky, clyde];
 
+
 //Set Enemy to specific 'lane'
 inky.y = 60;
 blinky.y = 60;
 pinky.y = 140;
 clyde.y = 220;
+
 
 //Set Enemy Speeds
 inky.dt = 1;
@@ -150,15 +178,3 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
-
-//Check for Collisions
-const checkCollisions = () => {
-  if ((player.position === inky.position) ||
-      (player.position === blinky.position) ||
-      (player.position === pinky.position) ||
-      (player.position === clyde.position)) {
-        player.x = 202;
-        player.y = 380;
-      };
-}
